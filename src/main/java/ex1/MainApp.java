@@ -26,8 +26,8 @@ public class MainApp {
 
     public static Map<Integer,Carte> citireInMap() {
         try {
-            File file=new File("src/main/resources/carti_map.json");
-            //File file=new File("src/main/resources/carti_modificate.json");
+            //File file=new File("src/main/resources/carti_map.json");
+            File file=new File("src/main/resources/carti_modificate.json");
             ObjectMapper mapper=new ObjectMapper();
             //mapper.registerModule(new JavaTimeModule());
             Map<Integer,Carte> carteMap = mapper.readValue(file, new TypeReference<Map<Integer,Carte>>(){});
@@ -104,7 +104,7 @@ public class MainApp {
 
                     Set<Carte> sortedCarti = cartiYual.stream()
                             .sorted(Comparator.comparing(Carte::titlul))
-                            .collect(Collectors.toSet());
+                            .collect(Collectors.toCollection(LinkedHashSet::new));
 
                     sortedCarti.forEach(System.out::println);
                 }
